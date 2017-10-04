@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app'>
+<head>
+    <title>Document</title>
+    <link rel='stylesheet' type='text/css' href='reset.css'>
+    <link rel='stylesheet' type='text/css' href='styles.css'>
+</head>
+<body ng-controller='mainCtrl'>
+    
+    Search Employees of all statuses: <input ng-model='allStatusFilter'>
+    <div>
+        <input ng-model="newHire.first_name">
+        <input ng-model="newHire.last_name">
+        <input ng-model="newHire.email">
+        <input ng-model="newHire.job_title">
+        <input ng-model="newHire.department">
+        <input ng-model="newHire.ssn">
+        <input ng-model="newHire.picture">
+        <button ng-click="addNewHire(newHire)">Add Employee</button>
+    </div>
+    <div class='allEmployeeContainer'>
+        <div class='employeeBoxes'>
+            Search New Hires: <input ng-model='newEmployeeFilter'>
+            <h3>New Hires:</h3>
+            <div ng-repeat='employee in newEmployees | filter: newEmployeeFilter | filter: allStatusFilter' >
+                <img src='{{employee.picture}}' alt='{{employee.first_name}}'>
+                <h3>NAME: {{employee.first_name}} {{employee.last_name}}</h3>
+                <p>DEPARTMENT: {{employee.department}}</p>
+                <p>JOB TITLE: {{employee.job_title}}</p>
+                <p>EMAIL: {{employee.email}}</p>
+                <p>SSN: {{employee.ssn}}</p>
+                <button ng-click='moveToEmployeeStatus(employee.ssn)'>Training Completed</button>
+            </div>
+        </div>
+        <div class='employeeBoxes'>
+            Search Employees: <input ng-model='employeeFilter'>
+            <h3>Employeed:</h3>
+            <div ng-repeat='employee in employees | filter: employeeFilter | filter: allStatusFilter'>
+                    <img src='{{employee.picture}}' alt='{{employee.first_name}}'>
+                    <h3>NAME: {{employee.first_name}} {{employee.last_name}}</h3>
+                    <p>DEPARTMENT: {{employee.department}}</p>
+                    <p>JOB TITLE: {{employee.job_title}}</p>
+                    <p>EMAIL: {{employee.email}}</p>
+                    <p>SSN: {{employee.ssn}}</p>
+                    <button>Terminate Employee</button>
+            </div>
+        </div>
+        <div class='employeeBoxes'>
+            Search Terminated: <input ng-model='terminatedFilter'>
+            <h3>Terminated:</h3>
+            <div ng-repeat='employee in terminatedEmployees | filter: terminatedFilter | filter: allStatusFilter'>
+                    <img src='{{employee.picture}}' alt='{{employee.first_name}}'>
+                    <h3>NAME: {{employee.first_name}} {{employee.last_name}}</h3>
+                    <p>DEPARTMENT: {{employee.department}}</p>
+                    <p>JOB TITLE: {{employee.job_title}}</p>
+                    <p>EMAIL: {{employee.email}}</p>
+                    <p>SSN: {{employee.ssn}}</p>
+                    <button>Re-Hire Employee</button>
+                </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js" charset="utf-8"></script>
+    <script src='./js/app.js'></script>
+    <script src='./js/mainCtrl.js'></script>
+</body>
+</html>
